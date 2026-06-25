@@ -204,24 +204,31 @@ prompt patterns.
 ## 🦾 Hermes Agent Support
 
 PaperLocus also works with [Hermes Agent](https://hermes-agent.nousresearch.com/).
-The `hermes/` directory contains an adapted SKILL.md with Hermes-specific features:
+The `hermes/` directory contains bilingual Hermes-adapted skills with platform-specific features:
 
-- **Auto-trigger** — the skill activates automatically when you send a PDF, arXiv link, DOI, screenshot, or paper title (no need to type `$paperlocus`)
+| File | Language | Triggers on |
+|---|---|---|
+| `hermes/SKILL.md` | English (default) | PDF, arXiv, DOI, "read this paper", etc. |
+| `hermes/SKILL.zh.md` | 中文 | PDF、arXiv、DOI、「读论文」「帮我看看这篇论文」等 |
+
+Key features over the Codex original:
+- **Auto-trigger** — activates automatically when you send a paper (no `$paperlocus` prefix needed)
 - **Tool bindings** — explicit instructions for `pymupdf` (PDF), arXiv API, `vision_analyze` (screenshots), and `web_search`
-- **Chinese-first output** — defaults to Chinese when the user writes in Chinese
-- **Full parity** — identical classification logic, anti-hallucination rules, and output template as the original Codex skill
+- **Bilingual** — English and Chinese editions with native section names and trigger keywords
+- **Full parity** — identical classification logic, anti-hallucination rules, and output template
 
 ### Quick Install for Hermes
 
 ```bash
-# Copy the Hermes adapter into your Hermes skills directory
+# Copy both editions into your Hermes skills directory
 mkdir -p ~/AppData/Local/hermes/skills/research/paperlocus
-cp -R hermes/* ~/AppData/Local/hermes/skills/research/paperlocus/
+cp hermes/SKILL.md hermes/SKILL.zh.md ~/AppData/Local/hermes/skills/research/paperlocus/
+cp -R hermes/references ~/AppData/Local/hermes/skills/research/paperlocus/
 ```
 
 Or use `hermes skill install` if the skill is published to the Hermes Skills Hub.
 
-After installation, restart Hermes or run `/reload-skills`. The skill triggers on: PDF, arXiv link, DOI, paper title, screenshot, or keywords like "读论文".
+After installation, restart Hermes or run `/reload-skills`.
 
 ## 📂 Repository Layout
 
@@ -231,10 +238,15 @@ paperlocus/
   examples/
     sample-prompts.md
     sample-output.md
-  paperlocus/
+  paperlocus/            ← Codex skill (original)
     SKILL.md
     agents/
       openai.yaml
+    references/
+      paper_type_examples.md
+  hermes/                ← Hermes Agent adapter (bilingual)
+    SKILL.md             — English edition
+    SKILL.zh.md          — 中文版
     references/
       paper_type_examples.md
 ```

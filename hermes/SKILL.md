@@ -1,6 +1,6 @@
 ---
 name: paperlocus
-description: "Reference-aware whole-paper reading and structured research-note generation. Use when the user wants to understand an entire paper, place it in the literature, compare it against core prior work or baselines, or decide whether a paper should be read as a method paper or as a Nature/Science-style evidence-chain paper. Trigger: user provides a PDF, arXiv link, DOI, paper title, screenshot, or says '读论文' / 'read this paper' / '帮我看看这篇论文'."
+description: "Reference-aware whole-paper reading and structured research-note generation. Use when the user wants to understand an entire paper, place it in the literature, compare it against core prior work or baselines, or decide whether a paper should be read as a method paper or as a Nature/Science-style evidence-chain paper. Trigger: user provides a PDF, arXiv link, DOI, paper title, screenshot, or asks to read/analyze a paper."
 ---
 
 # PaperLocus (Hermes Agent Adapter)
@@ -8,10 +8,12 @@ description: "Reference-aware whole-paper reading and structured research-note g
 Reference-aware paper reading that positions every paper in the literature — not just in a summary.
 This is the Hermes Agent adapter for PaperLocus. For the original Codex skill, see `../paperlocus/SKILL.md`.
 
+> 📝 **中文用户**：如需中文输出，请使用 [`SKILL.zh.md`](SKILL.zh.md)。
+
 ## Working Mode
 
 - Treat this skill as a whole-paper reading and literature-positioning workflow.
-- Produce the output in the user's preferred language. Default to Chinese if the user writes in Chinese.
+- Produce the output in the user's preferred language. Default to English.
 - Build understanding from the paper itself first.
 - Prefer a reusable Markdown note over a one-off loose summary.
 
@@ -63,7 +65,7 @@ This is the Hermes Agent adapter for PaperLocus. For the original Codex skill, s
 
 **Prefer the CS conference/arXiv branch** when most of the following are true:
 1. the abstract is centered on a new model, algorithm, framework, benchmark, or training recipe
-2. the paper structure looks like `introduction -> related work -> method -> experiments -> conclusion`
+2. the paper structure looks like `introduction → related work → method → experiments → conclusion`
 3. the introduction spends substantial space critiquing prior methods and motivating a technical design
 4. the main evidence is comparison against baselines, ablations, scaling curves, and benchmark metrics
 5. the contribution is framed as "we propose" more than "we discover" or "we show"
@@ -104,7 +106,7 @@ This is the Hermes Agent adapter for PaperLocus. For the original Codex skill, s
 
 ## Anti-Hallucination Rules
 
-- Separate `paper claim`, `evidence`, `inference`, and `open question` when precision matters.
+- Separate **paper claim**, **evidence**, **inference**, and **open question** when precision matters.
 - Do not invent prior-work links, metrics, datasets, implementation details, or novelty claims that are not supported by the paper or a verified source.
 - Treat hallucination broadly:
   - not only fabricated facts
@@ -115,15 +117,15 @@ This is the Hermes Agent adapter for PaperLocus. For the original Codex skill, s
 
 Use a compact note with these sections:
 
-- **一句话总结** — one-sentence summary
-- **论文卡片** — paper card (title, authors, venue, year, input condition)
-- **论文类型** — paper type (method paper / evidence-chain / mixed)
-- **文献位置** — position in the literature (built on A, changed B, got C)
-- **引言主线** or **科学问题** — introduction arc or scientific question
-- **方法框架** — method frame
-- **实验设计与核心结果** — experiment design and core results
-- **主要贡献** — main contributions
-- **局限、反例与检查点** — limitations, counterexamples, and checks
-- **值得细读的部分** — sections worth close reading
+- **One-Sentence Summary**
+- **Paper Card** — title, authors, venue, year, input condition
+- **Paper Type** — method paper / evidence-chain / mixed
+- **Position in the Literature** — built on A, changed B, got C
+- **Introduction Arc** or **Scientific Question**
+- **Method Frame**
+- **Experiment Design & Core Results**
+- **Main Contributions**
+- **Limitations, Counterexamples & Checks**
+- **Sections Worth Close Reading**
 
 When the input is partial (title-only, screenshot, abstract-only), clearly mark the note level (e.g. "title-only smoke test") and separate paper claims from inference.
