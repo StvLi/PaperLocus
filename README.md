@@ -209,7 +209,7 @@ The `hermes/` directory contains bilingual Hermes-adapted skills with platform-s
 | File | Language | Triggers on |
 |---|---|---|
 | `hermes/SKILL.md` | English (default) | PDF, arXiv, DOI, "read this paper", etc. |
-| `hermes/SKILL.zh.md` | 中文 | PDF、arXiv、DOI、「读论文」「帮我看看这篇论文」等 |
+| `hermes/SKILL.zh.md` | Chinese | PDF, arXiv, DOI, Chinese keywords |
 
 Key features over the Codex original:
 - **Auto-trigger** — activates automatically when you send a paper (no `$paperlocus` prefix needed)
@@ -246,7 +246,7 @@ paperlocus/
       paper_type_examples.md
   hermes/                ← Hermes Agent adapter (bilingual)
     SKILL.md             — English edition
-    SKILL.zh.md          — 中文版
+    SKILL.zh.md          — Chinese edition
     references/
       paper_type_examples.md
 ```
