@@ -201,6 +201,28 @@ prompt patterns.
   noise rather than a failed PaperLocus run.
 - Start small, verify the skill is visible, then move to deep PDF reading.
 
+## 🦾 Hermes Agent Support
+
+PaperLocus also works with [Hermes Agent](https://hermes-agent.nousresearch.com/).
+The `hermes/` directory contains an adapted SKILL.md with Hermes-specific features:
+
+- **Auto-trigger** — the skill activates automatically when you send a PDF, arXiv link, DOI, screenshot, or paper title (no need to type `$paperlocus`)
+- **Tool bindings** — explicit instructions for `pymupdf` (PDF), arXiv API, `vision_analyze` (screenshots), and `web_search`
+- **Chinese-first output** — defaults to Chinese when the user writes in Chinese
+- **Full parity** — identical classification logic, anti-hallucination rules, and output template as the original Codex skill
+
+### Quick Install for Hermes
+
+```bash
+# Copy the Hermes adapter into your Hermes skills directory
+mkdir -p ~/AppData/Local/hermes/skills/research/paperlocus
+cp -R hermes/* ~/AppData/Local/hermes/skills/research/paperlocus/
+```
+
+Or use `hermes skill install` if the skill is published to the Hermes Skills Hub.
+
+After installation, restart Hermes or run `/reload-skills`. The skill triggers on: PDF, arXiv link, DOI, paper title, screenshot, or keywords like "读论文".
+
 ## 📂 Repository Layout
 
 ```text
