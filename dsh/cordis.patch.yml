@@ -1,0 +1,17 @@
+# PaperLocus for DeepSeek Harness — opt-in filesystem Skill provider.
+#
+# The bundle contributes no service, no tool and no UI: it only adds a second
+# `dsh-skill-filesystem` provider whose sole root is the Skill packaged inside
+# this npm package, so `paperlocus` joins the session skill catalog.
+#
+# The Skill root is resolved from the installed npm identity anchored at the DSH
+# profile (Loader `baseUrl`) — never as a path concatenated onto `baseUrl`, and
+# never as a monorepo-relative path — so the row works from a registry install,
+# a `link:` checkout, a git install or a packed tarball alike.
+- insert:
+    - id: paperlocus-skill-filesystem
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      config:
+        providerName: paperlocus-plugin
+        includeDefaultRoots: false
+        bundledSkillDir: !!js process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('dsh-paperlocus/package.json')), 'skills')

@@ -106,6 +106,22 @@ Extract the title, abstract, section headings, and conclusion first.
 Then classify the paper type and list which sections should be read next.
 ```
 
+## 🧩 DeepSeek Harness (dsh)
+
+The same skill is available for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
+as an opt-in **skill-only bundle** in [`dsh/`](./dsh/).
+
+```bash
+dsh plugin --profile web add dsh-paperlocus
+```
+
+The bundle adds one isolated filesystem Skill provider whose only root is the packaged
+`skills/` directory, so `paperlocus` joins the session catalog without shadowing the
+project or user skill roots. The skill body, classification logic, anti-hallucination
+rules and output template are the same; only the frontmatter (`whenToUse`) and the tool
+mapping (`read` / `web_fetch` / `web_search` / `write`) are adapted to dsh.
+See [`dsh/README.md`](./dsh/README.md) for verification, uninstall and derivation notes.
+
 ## 🧠 Mental Model
 
 ```mermaid
@@ -215,6 +231,19 @@ paperlocus/
       openai.yaml
     references/
       paper_type_examples.md
+  dsh/
+    README.md
+    package.json
+    cordis.patch.yml
+    lib/
+      index.js
+    skills/
+      paperlocus/
+        SKILL.md
+        references/
+          paper_type_examples.md
+    test/
+      skill-discovery.test.mjs
 ```
 
 ## 🚢 Release Copy
